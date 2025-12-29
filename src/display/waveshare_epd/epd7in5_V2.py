@@ -161,8 +161,13 @@ class EPD:
         self.send_command(0X60)			#TCON SETTING
         self.send_data(0x22)
 
-        # Select partial refresh LUT
-        self.set_lut(self.lut_partial_update)
+        # Select partial refresh LUT when available to avoid the full white/black
+        # flash that occurs with the default full-refresh waveform.
+        lut_partial = getattr(self, "lut_partial_update", None)
+        if lut_partial:
+            self.set_lut(lut_partial)
+        else:
+            self.set_lut(getattr(self, "lut_full_update", None))
 
         # EPD hardware init end
         return 0
