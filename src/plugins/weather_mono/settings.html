@@ -46,6 +46,11 @@
     <label for="displayMetrics" class="form-label">Display: </label>
 
     <div class="form-group">
+        <input type="checkbox" id="sectionBorders" name="sectionBorders" onclick="this.value=this.checked ? 'true' : 'false';">
+        <span>Section Borders</span>
+    </div>
+
+    <div class="form-group">
       <input type="checkbox" id="displayRefreshTime" name="displayRefreshTime" onclick="this.value=this.checked ? 'true' : 'false';">
       <span>Refresh Time</span>
     </div>
@@ -191,6 +196,9 @@
 
             document.getElementById('units').value = pluginSettings.units;
 
+            document.getElementById('sectionBorders').checked = pluginSettings.sectionBorders;
+            document.getElementById('sectionBorders').value = pluginSettings.sectionBorders;
+
             document.getElementById('displayRefreshTime').checked = pluginSettings.displayRefreshTime;
             document.getElementById('displayRefreshTime').value = pluginSettings.displayRefreshTime;
 
@@ -202,7 +210,7 @@
 
 			document.getElementById('displayRain').checked = pluginSettings.displayRain;
             document.getElementById('displayRain').value = pluginSettings.displayRain;
-			
+
             document.getElementById('displayForecast').checked = pluginSettings.displayForecast;
             document.getElementById('displayForecast').value = pluginSettings.displayForecast;
 
@@ -212,7 +220,7 @@
             document.getElementById('moonPhase').value = pluginSettings.moonPhase;
 
             document.getElementById('weatherTimeZone').value = pluginSettings.weatherTimeZone;
-            
+
             selectedTitle = pluginSettings.titleSelection || 'location';
             weatherProvider = pluginSettings.weatherProvider || 'OpenMeteo';
 
@@ -220,6 +228,8 @@
         } else {
             // set default values
             document.getElementById('units').value = "imperial";
+            document.getElementById('sectionBorders').checked = true;
+            document.getElementById('sectionBorders').value = "true";
             document.getElementById('displayRefreshTime').checked = true;
             document.getElementById('displayRefreshTime').value = "true";
             document.getElementById('displayMetrics').checked = true;

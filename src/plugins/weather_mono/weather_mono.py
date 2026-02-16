@@ -1,4 +1,5 @@
 import logging
+import os
 from datetime import datetime
 
 from plugins.weather.weather import Weather, pytz
@@ -7,6 +8,70 @@ logger = logging.getLogger(__name__)
 
 
 class WeatherMono(Weather):
+    ICON_TOKEN_MAP = {
+        "01d": "sunny",
+        "01n": "nights_stay",
+        "02d": "partly_cloudy_day",
+        "02n": "partly_cloudy_night",
+        "022d": "wb_sunny",
+        "022n": "nights_stay",
+        "04d": "cloud",
+        "09d": "rainy",
+        "10d": "rainy",
+        "10n": "rainy",
+        "11d": "thunderstorm",
+        "13d": "ac_unit",
+        "48d": "foggy",
+        "50d": "foggy",
+        "51d": "rainy",
+        "53d": "rainy",
+        "56d": "weather_mix",
+        "57d": "weather_mix",
+        "71d": "ac_unit",
+        "73d": "ac_unit",
+        "77d": "grain",
+        "newmoon": "brightness_2",
+        "waxingcrescent": "brightness_2",
+        "firstquarter": "brightness_2",
+        "waxinggibbous": "brightness_2",
+        "fullmoon": "brightness_3",
+        "waninggibbous": "brightness_2",
+        "lastquarter": "brightness_2",
+        "waningcrescent": "brightness_2",
+        "sunrise": "wb_twilight",
+        "sunset": "wb_twilight",
+        "wind": "air",
+        "humidity": "water_drop",
+        "pressure": "compress",
+        "uvi": "light_mode",
+        "visibility": "visibility",
+        "aqi": "air",
+    }
+
+    def _icon_name_from_path(self, icon_path):
+        if not icon_path:
+            return ""
+        return os.path.splitext(os.path.basename(icon_path))[0]
+
+    def _token_for_icon(self, icon_path):
+        icon_name = self._icon_name_from_path(icon_path)
+        return self.ICON_TOKEN_MAP.get(icon_name, "help")
+
+    def _attach_material_symbol_tokens(self, template_params):
+        template_params["current_icon_token"] = self._token_for_icon(template_params.get("current_day_icon"))
+
+        for forecast_item in template_params.get("forecast", []):
+            forecast_item["icon_token"] = self._token_for_icon(forecast_item.get("icon"))
+            forecast_item["moon_icon_token"] = self._token_for_icon(forecast_item.get("moon_phase_icon"))
+
+        for data_point in template_params.get("data_points", []):
+            data_point["icon_token"] = self._token_for_icon(data_point.get("icon"))
+
+    def _validate_symbol_font(self):
+        font_path = self.get_plugin_dir("icons/MaterialSymbolsOutlined.ttf")
+        if not os.path.isfile(font_path):
+            logger.warning("Weather Mono symbol font not found: %s", font_path)
+
     def generate_image(self, settings, device_config):
         lat = float(settings.get('latitude'))
         long = float(settings.get('longitude'))
@@ -65,6 +130,9 @@ class WeatherMono(Weather):
         else:
             last_refresh_time = now.strftime("%Y-%m-%d %I:%M %p")
         template_params["last_refresh_time"] = last_refresh_time
+
+        self._attach_material_symbol_tokens(template_params)
+        self._validate_symbol_font()
 
         image = self.render_image(dimensions, "weather_mono.html", "weather_mono.css", template_params)
 

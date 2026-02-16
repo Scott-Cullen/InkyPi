@@ -1,7 +1,7 @@
 {% extends "plugin.html" %}
 
 {% block content %}
-<div class="mono-weather-dashboard">
+<div class="mono-weather-dashboard {% if plugin_settings.sectionBorders != 'false' %}with-borders{% endif %}">
   {% if plugin_settings.displayRefreshTime == "true" %}
     <div class="last-refresh">Updated {{ last_refresh_time }}</div>
   {% endif %}
@@ -12,7 +12,7 @@
   </div>
 
   <div class="current-panel panel">
-    <img class="current-icon" src="{{ current_day_icon }}" alt="Current Weather Icon">
+    <span class="material-symbols-outlined current-icon" aria-hidden="true">{{ current_icon_token }}</span>
     <div class="current-values">
       <div class="current-temp">{{ current_temperature }}<span class="temperature-unit">{{ temperature_unit }}</span></div>
       <div class="feels-like">Feels {{ feels_like }}{% if units != "standard" %}°{% endif %}</div>
@@ -24,7 +24,10 @@
   <div class="metrics panel">
     {% for dp in data_points %}
       <div class="metric-row">
-        <span class="metric-label">{{ dp.label }}</span>
+        <span class="metric-label">
+          <span class="material-symbols-outlined metric-icon" aria-hidden="true">{{ dp.icon_token }}</span>
+          {{ dp.label }}
+        </span>
         <span class="metric-value">
           {{ dp.measurement }}{% if dp.unit %} {{ dp.unit }}{% endif %}{% if dp.label == "Wind" %} {{ dp.arrow }}{% endif %}
         </span>
@@ -53,11 +56,11 @@
     {% for day in forecast[1:(plugin_settings.forecastDays | int) + 1] %}
       <div class="forecast-day panel">
         <div class="forecast-day-name">{{ day.day }}</div>
-        <img class="forecast-icon" src="{{ day.icon }}" alt="{{ day.day }} Weather Icon">
+        <span class="material-symbols-outlined forecast-icon" aria-hidden="true">{{ day.icon_token }}</span>
         <div class="forecast-temps">{{ day.high }}{% if units != "standard" %}°{% endif %} / {{ day.low }}{% if units != "standard" %}°{% endif %}</div>
         {% if plugin_settings.moonPhase and plugin_settings.moonPhase == "true" %}
         <div class="moon-phase">
-          <img class="moon-phase-icon" src="{{ day.moon_phase_icon }}" alt="Moon phase icon">
+          <span class="material-symbols-outlined moon-phase-icon" aria-hidden="true">{{ day.moon_icon_token }}</span>
           <span>{{ day.moon_phase_pct }}%</span>
         </div>
         {% endif %}

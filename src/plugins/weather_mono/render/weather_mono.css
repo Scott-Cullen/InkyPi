@@ -4,6 +4,28 @@
   padding: 0;
 }
 
+@font-face {
+  font-family: "Material Symbols Outlined";
+  src: url("../icons/MaterialSymbolsOutlined.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100 700;
+}
+
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  display: inline-block;
+  white-space: nowrap;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
 .mono-weather-dashboard {
   width: 100%;
   height: 100%;
@@ -38,9 +60,12 @@
 }
 
 .panel {
-  border: 2px solid currentColor;
   border-radius: 0.8dvw;
   padding: 0.6dvh 0.8dvw;
+}
+
+.with-borders .panel {
+  border: 2px solid currentColor;
 }
 
 .current-panel {
@@ -48,13 +73,12 @@
   align-items: center;
   justify-content: space-between;
   gap: 1dvw;
-  min-height: 16dvh;
+  min-height: 50dvh;
 }
 
 .current-icon {
-  width: 14dvw;
-  max-height: 14dvh;
-  object-fit: contain;
+  font-size: min(22dvh, 26dvw);
+  line-height: 1;
   flex-shrink: 0;
 }
 
@@ -64,7 +88,7 @@
 }
 
 .current-temp {
-  font-size: min(8.8dvh, 11dvw);
+  font-size: min(28dvh, 36dvw);
   font-weight: 700;
   line-height: 0.95;
 }
@@ -91,12 +115,22 @@
   justify-content: space-between;
   align-items: baseline;
   gap: 0.6dvw;
-  border-bottom: 1px solid currentColor;
   padding-bottom: 0.1dvh;
 }
 
+.with-borders .metric-row {
+  border-bottom: 1px solid currentColor;
+}
+
 .metric-label {
+  display: flex;
+  align-items: center;
+  gap: 0.3dvw;
   font-size: min(2dvh, 2.6dvw);
+}
+
+.metric-icon {
+  font-size: min(2.2dvh, 2.8dvw);
 }
 
 .metric-value {
@@ -116,6 +150,9 @@
   justify-content: space-between;
   gap: 0.5dvw;
   font-size: min(1.8dvh, 2.4dvw);
+}
+
+.with-borders .hourly-row {
   border-bottom: 1px solid currentColor;
 }
 
@@ -137,10 +174,9 @@
 }
 
 .forecast-icon {
-  width: 100%;
-  max-width: 9dvw;
-  max-height: 6dvh;
-  object-fit: contain;
+  display: inline-block;
+  font-size: min(7dvh, 8dvw);
+  line-height: 1;
 }
 
 .forecast-temps {
@@ -157,9 +193,8 @@
 }
 
 .moon-phase-icon {
-  width: 2.2dvw;
-  min-width: 12px;
-  object-fit: contain;
+  font-size: min(2.5dvh, 3dvw);
+  line-height: 1;
 }
 
 @media (max-aspect-ratio: 1) {
