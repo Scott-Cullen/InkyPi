@@ -8,6 +8,11 @@ logger = logging.getLogger(__name__)
 
 
 class WeatherMono(Weather):
+    def generate_settings_template(self):
+        template_params = super().generate_settings_template()
+        template_params["style_settings_template"] = "weather_mono/style_settings.html"
+        return template_params
+
     ICON_TOKEN_MAP = {
         "01d": "wb_sunny",
         "01n": "dark_mode",

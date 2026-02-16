@@ -276,6 +276,18 @@ body {
     flex-wrap: nowrap;
 }
 
+.margin-row {
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.margin-item {
+    flex-wrap: nowrap;
+    margin: 0;
+    gap: 0.35rem;
+}
+
 .nowrap {
     flex-wrap: nowrap;
 }
