@@ -114,8 +114,8 @@ class Wpotd(BasePlugin):
                 # Original behavior: download without resizing
                 session = get_http_session()
                 response = session.get(url, headers=self.HEADERS, timeout=10)
-            response.raise_for_status()
-            return Image.open(BytesIO(response.content))
+                response.raise_for_status()
+                return Image.open(BytesIO(response.content))
 
         except UnidentifiedImageError as e:
             logger.error(f"Unsupported image format at {url}: {str(e)}")

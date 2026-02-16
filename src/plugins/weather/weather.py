@@ -298,7 +298,6 @@ class Weather(BasePlugin):
             else:
                 if weather_icon.endswith('n'):
                     weather_icon = weather_icon.replace("n", "d")
-            weather_icon = f"{icon_code}d"        
             weather_icon_path = self.get_plugin_dir(f"icons/{weather_icon}.png")
 
             # --- moon phase & icon ---
@@ -659,6 +658,7 @@ class Weather(BasePlugin):
         else:
             visibility_conversion = 0.001       # m to km
             visibility_max = 10.                # km
+        at_max_visibility = False
         for i, time_str in enumerate(visibility_hourly_times):
             try:
                 if datetime.fromisoformat(time_str).astimezone(tz).hour == current_time.hour:
@@ -668,9 +668,12 @@ class Weather(BasePlugin):
             except ValueError:
                 logger.warning(f"Could not parse time string {time_str} for visibility.")
                 continue
-        visibility_str = f"{current_visibility:.1f}"
-        if at_max_visibility:
-            visibility_str = u"\u2265" + visibility_str
+        if current_visibility != "N/A":
+            visibility_str = f"{current_visibility:.1f}"
+            if at_max_visibility:
+                visibility_str = u"\u2265" + visibility_str
+        else:
+            visibility_str = "N/A"
         data_points.append({
             "label": "Visibility", 
             "measurement": visibility_str, 
