@@ -42,7 +42,7 @@
   position: absolute;
   top: 0.2dvh;
   right: 0.5dvw;
-  font-size: min(1.8dvh, 2.3dvw);
+  font-size: calc(min(2.2dvh, 2.8dvw) * var(--detail-scale, 1));
   font-weight: 600;
 }
 
@@ -53,12 +53,12 @@
 }
 
 .title {
-  font-size: min(6.4dvh, 7.2dvw);
+  font-size: calc(min(7.2dvh, 7.8dvw) * var(--header-scale, 1));
   font-weight: 700;
 }
 
 .current-date {
-  font-size: min(3.4dvh, 4.4dvw);
+  font-size: calc(min(4dvh, 4.9dvw) * var(--header-scale, 1));
 }
 
 .panel {
@@ -76,6 +76,10 @@
   display: grid;
   grid-template-columns: 56% 44%;
   gap: 0.7dvw;
+}
+
+.main-row.no-metrics {
+  grid-template-columns: 1fr;
 }
 
 .current-panel {
@@ -98,7 +102,7 @@
 }
 
 .current-temp {
-  font-size: min(33dvh, 38dvw);
+  font-size: calc(min(36dvh, 41dvw) * var(--main-scale, 1));
   font-weight: 700;
   line-height: 0.9;
 }
@@ -110,7 +114,7 @@
 
 .feels-like,
 .min-max {
-  font-size: min(3.2dvh, 3.7dvw);
+  font-size: calc(min(3.8dvh, 4.3dvw) * var(--detail-scale, 1));
   line-height: 1.15;
 }
 
@@ -138,15 +142,15 @@
   display: flex;
   align-items: center;
   gap: 0.4dvw;
-  font-size: min(3dvh, 3.3dvw);
+  font-size: calc(min(3.5dvh, 3.9dvw) * var(--detail-scale, 1));
 }
 
 .metric-icon {
-  font-size: min(3.2dvh, 3.5dvw);
+  font-size: calc(min(3.8dvh, 4.1dvw) * var(--detail-scale, 1));
 }
 
 .metric-value {
-  font-size: min(3.2dvh, 3.6dvw);
+  font-size: calc(min(3.6dvh, 4dvw) * var(--detail-scale, 1));
   font-weight: 700;
   white-space: nowrap;
 }
@@ -162,7 +166,7 @@
   display: flex;
   justify-content: space-between;
   gap: 0.5dvw;
-  font-size: min(2.5dvh, 2.8dvw);
+  font-size: calc(min(2.9dvh, 3.3dvw) * var(--detail-scale, 1));
 }
 
 .with-borders .hourly-row {
@@ -183,7 +187,7 @@
 }
 
 .forecast-day-name {
-  font-size: min(2.9dvh, 3.3dvw);
+  font-size: calc(min(3.4dvh, 3.8dvw) * var(--detail-scale, 1));
   font-weight: 700;
 }
 
@@ -194,7 +198,7 @@
 }
 
 .forecast-temps {
-  font-size: min(2.6dvh, 3dvw);
+  font-size: calc(min(3dvh, 3.4dvw) * var(--detail-scale, 1));
   font-weight: 600;
 }
 
@@ -203,7 +207,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.4dvw;
-  font-size: min(2.2dvh, 2.6dvw);
+  font-size: calc(min(2.6dvh, 3dvw) * var(--detail-scale, 1));
 }
 
 .moon-phase-icon {

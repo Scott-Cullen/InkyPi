@@ -46,6 +46,39 @@
     <label for="displayMetrics" class="form-label">Display: </label>
 
     <div class="form-group">
+        <label for="headerTextScale" class="form-label">Header Text Size:</label>
+        <select id="headerTextScale" name="headerTextScale" class="form-input">
+            <option value="85">85%</option>
+            <option value="100">100%</option>
+            <option value="115">115%</option>
+            <option value="130">130%</option>
+            <option value="145">145%</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="mainTextScale" class="form-label">Main Temp Text Size:</label>
+        <select id="mainTextScale" name="mainTextScale" class="form-input">
+            <option value="85">85%</option>
+            <option value="100">100%</option>
+            <option value="115">115%</option>
+            <option value="130">130%</option>
+            <option value="145">145%</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="detailTextScale" class="form-label">Metrics/Forecast Text Size:</label>
+        <select id="detailTextScale" name="detailTextScale" class="form-input">
+            <option value="85">85%</option>
+            <option value="100">100%</option>
+            <option value="115">115%</option>
+            <option value="130">130%</option>
+            <option value="145">145%</option>
+        </select>
+    </div>
+
+    <div class="form-group">
         <input type="checkbox" id="sectionBorders" name="sectionBorders" onclick="this.value=this.checked ? 'true' : 'false';">
         <span>Section Borders</span>
     </div>
@@ -196,6 +229,10 @@
 
             document.getElementById('units').value = pluginSettings.units;
 
+            document.getElementById('headerTextScale').value = pluginSettings.headerTextScale || '100';
+            document.getElementById('mainTextScale').value = pluginSettings.mainTextScale || '100';
+            document.getElementById('detailTextScale').value = pluginSettings.detailTextScale || '100';
+
             const sectionBordersEnabled = pluginSettings.sectionBorders === true || pluginSettings.sectionBorders === 'true' || pluginSettings.sectionBorders === undefined;
             document.getElementById('sectionBorders').checked = sectionBordersEnabled;
             document.getElementById('sectionBorders').value = sectionBordersEnabled ? 'true' : 'false';
@@ -229,6 +266,9 @@
         } else {
             // set default values
             document.getElementById('units').value = "imperial";
+            document.getElementById('headerTextScale').value = "100";
+            document.getElementById('mainTextScale').value = "100";
+            document.getElementById('detailTextScale').value = "100";
             document.getElementById('sectionBorders').checked = true;
             document.getElementById('sectionBorders').value = "true";
             document.getElementById('displayRefreshTime').checked = true;

@@ -1,8 +1,12 @@
 {% extends "plugin.html" %}
 
 {% block content %}
-{% set borders_on = plugin_settings.sectionBorders in [true, 'true', 'True', 1, '1'] or plugin_settings.sectionBorders is not defined %}
-<div class="mono-weather-dashboard {% if borders_on %}with-borders{% endif %}">
+{% set borders_on = plugin_settings.sectionBorders in [true, 'true', 'True', 1, '1'] %}
+{% set metrics_on = plugin_settings.displayMetrics == "true" %}
+{% set header_scale = plugin_settings.headerTextScale | default('100') %}
+{% set main_scale = plugin_settings.mainTextScale | default('100') %}
+{% set detail_scale = plugin_settings.detailTextScale | default('100') %}
+<div class="mono-weather-dashboard {% if borders_on %}with-borders{% endif %}" style="--header-scale: {{ header_scale | int / 100 }}; --main-scale: {{ main_scale | int / 100 }}; --detail-scale: {{ detail_scale | int / 100 }};">
   {% if plugin_settings.displayRefreshTime == "true" %}
     <div class="last-refresh">Updated {{ last_refresh_time }}</div>
   {% endif %}
@@ -12,7 +16,7 @@
     <div class="current-date">{{ current_date }}</div>
   </div>
 
-  <div class="main-row">
+  <div class="main-row {% if not metrics_on %}no-metrics{% endif %}">
     <div class="current-panel panel">
       <span class="material-symbols-outlined current-icon" aria-hidden="true">{{ current_icon_token }}</span>
       <div class="current-values">
@@ -22,7 +26,7 @@
       </div>
     </div>
 
-    {% if plugin_settings.displayMetrics and plugin_settings.displayMetrics == "true" %}
+    {% if metrics_on %}
     <div class="metrics panel">
       {% for dp in data_points %}
         <div class="metric-row">
