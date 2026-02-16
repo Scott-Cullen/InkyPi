@@ -1,7 +1,8 @@
 {% extends "plugin.html" %}
 
 {% block content %}
-<div class="mono-weather-dashboard {% if plugin_settings.sectionBorders != 'false' %}with-borders{% endif %}">
+{% set borders_on = plugin_settings.sectionBorders in [true, 'true', 'True', 1, '1'] or plugin_settings.sectionBorders is not defined %}
+<div class="mono-weather-dashboard {% if borders_on %}with-borders{% endif %}">
   {% if plugin_settings.displayRefreshTime == "true" %}
     <div class="last-refresh">Updated {{ last_refresh_time }}</div>
   {% endif %}
@@ -11,44 +12,46 @@
     <div class="current-date">{{ current_date }}</div>
   </div>
 
-  <div class="current-panel panel">
-    <span class="material-symbols-outlined current-icon" aria-hidden="true">{{ current_icon_token }}</span>
-    <div class="current-values">
-      <div class="current-temp">{{ current_temperature }}<span class="temperature-unit">{{ temperature_unit }}</span></div>
-      <div class="feels-like">Feels {{ feels_like }}{% if units != "standard" %}°{% endif %}</div>
-      <div class="min-max">H {{ forecast[0].high }}{% if units != "standard" %}°{% endif %} · L {{ forecast[0].low }}{% if units != "standard" %}°{% endif %}</div>
-    </div>
-  </div>
-
-  {% if plugin_settings.displayMetrics and plugin_settings.displayMetrics == "true" %}
-  <div class="metrics panel">
-    {% for dp in data_points %}
-      <div class="metric-row">
-        <span class="metric-label">
-          <span class="material-symbols-outlined metric-icon" aria-hidden="true">{{ dp.icon_token }}</span>
-          {{ dp.label }}
-        </span>
-        <span class="metric-value">
-          {{ dp.measurement }}{% if dp.unit %} {{ dp.unit }}{% endif %}{% if dp.label == "Wind" %} {{ dp.arrow }}{% endif %}
-        </span>
+  <div class="main-row">
+    <div class="current-panel panel">
+      <span class="material-symbols-outlined current-icon" aria-hidden="true">{{ current_icon_token }}</span>
+      <div class="current-values">
+        <div class="current-temp">{{ current_temperature }}<span class="temperature-unit">{{ temperature_unit }}</span></div>
+        <div class="feels-like">Feels {{ feels_like }}{% if units != "standard" %}°{% endif %}</div>
+        <div class="min-max">H {{ forecast[0].high }}{% if units != "standard" %}°{% endif %} · L {{ forecast[0].low }}{% if units != "standard" %}°{% endif %}</div>
       </div>
-    {% endfor %}
+    </div>
+
+    {% if plugin_settings.displayMetrics and plugin_settings.displayMetrics == "true" %}
+    <div class="metrics panel">
+      {% for dp in data_points %}
+        <div class="metric-row">
+          <span class="metric-label">
+            <span class="material-symbols-outlined metric-icon" aria-hidden="true">{{ dp.icon_token }}</span>
+            {{ dp.label }}
+          </span>
+          <span class="metric-value">
+            {{ dp.measurement }}{% if dp.unit %} {{ dp.unit }}{% endif %}{% if dp.label == "Wind" %} {{ dp.arrow }}{% endif %}
+          </span>
+        </div>
+      {% endfor %}
+    </div>
+    {% endif %}
   </div>
-  {% endif %}
 
   {% if plugin_settings.displayGraph and plugin_settings.displayGraph == "true" %}
-  <div class="hourly panel">
-    {% for hour in hourly_forecast[:8] %}
-      <div class="hourly-row">
-        <span>{{ hour.time }}</span>
-        <span>{{ hour.temperature }}{% if units != "standard" %}°{% endif %}</span>
-        <span>{{ (hour.precipitation * 100) | round | int }}%</span>
-        {% if plugin_settings.displayRain == "true" %}
-        <span>{{ hour.rain }}</span>
-        {% endif %}
-      </div>
-    {% endfor %}
-  </div>
+    <div class="hourly panel">
+      {% for hour in hourly_forecast[:8] %}
+        <div class="hourly-row">
+          <span>{{ hour.time }}</span>
+          <span>{{ hour.temperature }}{% if units != "standard" %}°{% endif %}</span>
+          <span>{{ (hour.precipitation * 100) | round | int }}%</span>
+          {% if plugin_settings.displayRain == "true" %}
+          <span>{{ hour.rain }}</span>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
   {% endif %}
 
   {% if plugin_settings.displayForecast and plugin_settings.displayForecast == "true" %}

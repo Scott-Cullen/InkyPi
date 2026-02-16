@@ -31,7 +31,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.9dvh;
+  gap: 0.6dvh;
   font-family: "Jost";
   color: inherit;
   position: relative;
@@ -48,36 +48,45 @@
 .header {
   text-align: center;
   line-height: 1.05;
+  flex-shrink: 0;
 }
 
 .title {
-  font-size: min(5.2dvh, 6.2dvw);
+  font-size: min(6.4dvh, 7.2dvw);
   font-weight: 700;
 }
 
 .current-date {
-  font-size: min(2.8dvh, 3.8dvw);
+  font-size: min(3.4dvh, 4.4dvw);
 }
 
 .panel {
   border-radius: 0.8dvw;
-  padding: 0.6dvh 0.8dvw;
+  padding: 0.8dvh 1dvw;
 }
 
 .with-borders .panel {
   border: 2px solid currentColor;
 }
 
+.main-row {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 56% 44%;
+  gap: 0.7dvw;
+}
+
 .current-panel {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1dvw;
-  min-height: 50dvh;
+  gap: 1.4dvw;
+  min-height: 0;
 }
 
 .current-icon {
-  font-size: min(22dvh, 26dvw);
+  font-size: min(24dvh, 28dvw);
   line-height: 1;
   flex-shrink: 0;
 }
@@ -88,34 +97,36 @@
 }
 
 .current-temp {
-  font-size: min(28dvh, 36dvw);
+  font-size: min(33dvh, 38dvw);
   font-weight: 700;
-  line-height: 0.95;
+  line-height: 0.9;
 }
 
 .temperature-unit {
-  font-size: 0.32em;
+  font-size: 0.34em;
   vertical-align: top;
 }
 
 .feels-like,
 .min-max {
-  font-size: min(2.3dvh, 3.2dvw);
-  line-height: 1.1;
+  font-size: min(3.2dvh, 3.7dvw);
+  line-height: 1.15;
 }
 
 .metrics {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.4dvh 1dvw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 0;
+  gap: 0.1dvh;
 }
 
 .metric-row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 0.6dvw;
-  padding-bottom: 0.1dvh;
+  gap: 0.8dvw;
+  padding: 0.1dvh 0;
 }
 
 .with-borders .metric-row {
@@ -125,31 +136,32 @@
 .metric-label {
   display: flex;
   align-items: center;
-  gap: 0.3dvw;
-  font-size: min(2dvh, 2.6dvw);
+  gap: 0.4dvw;
+  font-size: min(3dvh, 3.3dvw);
 }
 
 .metric-icon {
-  font-size: min(2.2dvh, 2.8dvw);
+  font-size: min(3.2dvh, 3.5dvw);
 }
 
 .metric-value {
-  font-size: min(2.2dvh, 2.8dvw);
+  font-size: min(3.2dvh, 3.6dvw);
   font-weight: 700;
   white-space: nowrap;
 }
 
 .hourly {
+  flex-shrink: 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 0.3dvh 0.8dvw;
+  gap: 0.3dvh 0.9dvw;
 }
 
 .hourly-row {
   display: flex;
   justify-content: space-between;
   gap: 0.5dvw;
-  font-size: min(1.8dvh, 2.4dvw);
+  font-size: min(2.5dvh, 2.8dvw);
 }
 
 .with-borders .hourly-row {
@@ -157,6 +169,7 @@
 }
 
 .forecast {
+  flex-shrink: 0;
   display: flex;
   gap: 0.8dvw;
   justify-content: space-between;
@@ -169,18 +182,18 @@
 }
 
 .forecast-day-name {
-  font-size: min(2.2dvh, 2.8dvw);
+  font-size: min(2.9dvh, 3.3dvw);
   font-weight: 700;
 }
 
 .forecast-icon {
   display: inline-block;
-  font-size: min(7dvh, 8dvw);
+  font-size: min(7.8dvh, 8.8dvw);
   line-height: 1;
 }
 
 .forecast-temps {
-  font-size: min(1.9dvh, 2.4dvw);
+  font-size: min(2.6dvh, 3dvw);
   font-weight: 600;
 }
 
@@ -189,17 +202,21 @@
   align-items: center;
   justify-content: center;
   gap: 0.4dvw;
-  font-size: min(1.7dvh, 2.2dvw);
+  font-size: min(2.2dvh, 2.6dvw);
 }
 
 .moon-phase-icon {
-  font-size: min(2.5dvh, 3dvw);
+  font-size: min(2.9dvh, 3.2dvw);
   line-height: 1;
 }
 
 @media (max-aspect-ratio: 1) {
-  .metrics {
+  .main-row {
     grid-template-columns: 1fr;
+  }
+
+  .metrics {
+    gap: 0.3dvh;
   }
 
   .forecast {

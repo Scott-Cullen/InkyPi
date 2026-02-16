@@ -196,8 +196,9 @@
 
             document.getElementById('units').value = pluginSettings.units;
 
-            document.getElementById('sectionBorders').checked = pluginSettings.sectionBorders;
-            document.getElementById('sectionBorders').value = pluginSettings.sectionBorders;
+            const sectionBordersEnabled = pluginSettings.sectionBorders === true || pluginSettings.sectionBorders === 'true' || pluginSettings.sectionBorders === undefined;
+            document.getElementById('sectionBorders').checked = sectionBordersEnabled;
+            document.getElementById('sectionBorders').value = sectionBordersEnabled ? 'true' : 'false';
 
             document.getElementById('displayRefreshTime').checked = pluginSettings.displayRefreshTime;
             document.getElementById('displayRefreshTime').value = pluginSettings.displayRefreshTime;
