@@ -9,24 +9,24 @@ logger = logging.getLogger(__name__)
 
 class WeatherMono(Weather):
     ICON_TOKEN_MAP = {
-        "01d": "sunny",
-        "01n": "nights_stay",
-        "02d": "partly_cloudy_day",
-        "02n": "partly_cloudy_night",
+        "01d": "wb_sunny",
+        "01n": "dark_mode",
+        "02d": "cloud",
+        "02n": "cloud",
         "022d": "wb_sunny",
-        "022n": "nights_stay",
+        "022n": "dark_mode",
         "04d": "cloud",
-        "09d": "rainy",
-        "10d": "rainy",
-        "10n": "rainy",
-        "11d": "thunderstorm",
+        "09d": "water_drop",
+        "10d": "cloud",
+        "10n": "cloud",
+        "11d": "bolt",
         "13d": "ac_unit",
-        "48d": "foggy",
-        "50d": "foggy",
-        "51d": "rainy",
-        "53d": "rainy",
-        "56d": "rainy",
-        "57d": "rainy",
+        "48d": "cloud",
+        "50d": "cloud",
+        "51d": "water_drop",
+        "53d": "water_drop",
+        "56d": "ac_unit",
+        "57d": "ac_unit",
         "71d": "ac_unit",
         "73d": "ac_unit",
         "77d": "cloud",
@@ -55,7 +55,7 @@ class WeatherMono(Weather):
 
     def _token_for_icon(self, icon_path):
         icon_name = self._icon_name_from_path(icon_path)
-        return self.ICON_TOKEN_MAP.get(icon_name, "help")
+        return self.ICON_TOKEN_MAP.get(icon_name, "cloud")
 
     def _attach_material_symbol_tokens(self, template_params):
         template_params["current_icon_token"] = self._token_for_icon(template_params.get("current_day_icon"))
