@@ -1,0 +1,177 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.mono-weather-dashboard {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9dvh;
+  font-family: "Jost";
+  color: inherit;
+  position: relative;
+}
+
+.last-refresh {
+  position: absolute;
+  top: 0.2dvh;
+  right: 0.5dvw;
+  font-size: min(1.8dvh, 2.3dvw);
+  font-weight: 600;
+}
+
+.header {
+  text-align: center;
+  line-height: 1.05;
+}
+
+.title {
+  font-size: min(5.2dvh, 6.2dvw);
+  font-weight: 700;
+}
+
+.current-date {
+  font-size: min(2.8dvh, 3.8dvw);
+}
+
+.panel {
+  border: 2px solid currentColor;
+  border-radius: 0.8dvw;
+  padding: 0.6dvh 0.8dvw;
+}
+
+.current-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1dvw;
+  min-height: 16dvh;
+}
+
+.current-icon {
+  width: 14dvw;
+  max-height: 14dvh;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.current-values {
+  width: 100%;
+  text-align: center;
+}
+
+.current-temp {
+  font-size: min(8.8dvh, 11dvw);
+  font-weight: 700;
+  line-height: 0.95;
+}
+
+.temperature-unit {
+  font-size: 0.32em;
+  vertical-align: top;
+}
+
+.feels-like,
+.min-max {
+  font-size: min(2.3dvh, 3.2dvw);
+  line-height: 1.1;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4dvh 1dvw;
+}
+
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.6dvw;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 0.1dvh;
+}
+
+.metric-label {
+  font-size: min(2dvh, 2.6dvw);
+}
+
+.metric-value {
+  font-size: min(2.2dvh, 2.8dvw);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.hourly {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.3dvh 0.8dvw;
+}
+
+.hourly-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5dvw;
+  font-size: min(1.8dvh, 2.4dvw);
+  border-bottom: 1px solid currentColor;
+}
+
+.forecast {
+  display: flex;
+  gap: 0.8dvw;
+  justify-content: space-between;
+}
+
+.forecast-day {
+  flex: 1;
+  text-align: center;
+  padding: 0.5dvh 0.5dvw;
+}
+
+.forecast-day-name {
+  font-size: min(2.2dvh, 2.8dvw);
+  font-weight: 700;
+}
+
+.forecast-icon {
+  width: 100%;
+  max-width: 9dvw;
+  max-height: 6dvh;
+  object-fit: contain;
+}
+
+.forecast-temps {
+  font-size: min(1.9dvh, 2.4dvw);
+  font-weight: 600;
+}
+
+.moon-phase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4dvw;
+  font-size: min(1.7dvh, 2.2dvw);
+}
+
+.moon-phase-icon {
+  width: 2.2dvw;
+  min-width: 12px;
+  object-fit: contain;
+}
+
+@media (max-aspect-ratio: 1) {
+  .metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .forecast {
+    flex-wrap: wrap;
+  }
+
+  .forecast-day {
+    min-width: 23%;
+  }
+}

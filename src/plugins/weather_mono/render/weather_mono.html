@@ -1,0 +1,69 @@
+{% extends "plugin.html" %}
+
+{% block content %}
+<div class="mono-weather-dashboard">
+  {% if plugin_settings.displayRefreshTime == "true" %}
+    <div class="last-refresh">Updated {{ last_refresh_time }}</div>
+  {% endif %}
+
+  <div class="header">
+    <div class="title">{{ title }}</div>
+    <div class="current-date">{{ current_date }}</div>
+  </div>
+
+  <div class="current-panel panel">
+    <img class="current-icon" src="{{ current_day_icon }}" alt="Current Weather Icon">
+    <div class="current-values">
+      <div class="current-temp">{{ current_temperature }}<span class="temperature-unit">{{ temperature_unit }}</span></div>
+      <div class="feels-like">Feels {{ feels_like }}{% if units != "standard" %}°{% endif %}</div>
+      <div class="min-max">H {{ forecast[0].high }}{% if units != "standard" %}°{% endif %} · L {{ forecast[0].low }}{% if units != "standard" %}°{% endif %}</div>
+    </div>
+  </div>
+
+  {% if plugin_settings.displayMetrics and plugin_settings.displayMetrics == "true" %}
+  <div class="metrics panel">
+    {% for dp in data_points %}
+      <div class="metric-row">
+        <span class="metric-label">{{ dp.label }}</span>
+        <span class="metric-value">
+          {{ dp.measurement }}{% if dp.unit %} {{ dp.unit }}{% endif %}{% if dp.label == "Wind" %} {{ dp.arrow }}{% endif %}
+        </span>
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if plugin_settings.displayGraph and plugin_settings.displayGraph == "true" %}
+  <div class="hourly panel">
+    {% for hour in hourly_forecast[:8] %}
+      <div class="hourly-row">
+        <span>{{ hour.time }}</span>
+        <span>{{ hour.temperature }}{% if units != "standard" %}°{% endif %}</span>
+        <span>{{ (hour.precipitation * 100) | round | int }}%</span>
+        {% if plugin_settings.displayRain == "true" %}
+        <span>{{ hour.rain }}</span>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if plugin_settings.displayForecast and plugin_settings.displayForecast == "true" %}
+  <div class="forecast">
+    {% for day in forecast[1:(plugin_settings.forecastDays | int) + 1] %}
+      <div class="forecast-day panel">
+        <div class="forecast-day-name">{{ day.day }}</div>
+        <img class="forecast-icon" src="{{ day.icon }}" alt="{{ day.day }} Weather Icon">
+        <div class="forecast-temps">{{ day.high }}{% if units != "standard" %}°{% endif %} / {{ day.low }}{% if units != "standard" %}°{% endif %}</div>
+        {% if plugin_settings.moonPhase and plugin_settings.moonPhase == "true" %}
+        <div class="moon-phase">
+          <img class="moon-phase-icon" src="{{ day.moon_phase_icon }}" alt="Moon phase icon">
+          <span>{{ day.moon_phase_pct }}%</span>
+        </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
