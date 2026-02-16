@@ -18,7 +18,9 @@
 
   <div class="main-row {% if not metrics_on %}no-metrics{% endif %}">
     <div class="current-panel panel">
-      <span class="material-symbols-outlined current-icon" aria-hidden="true">{{ current_icon_token }}</span>
+      <div class="current-icon-wrap">
+        <span class="material-symbols-outlined current-icon" aria-hidden="true">{{ current_icon_token }}</span>
+      </div>
       <div class="current-values">
         <div class="current-temp">{{ current_temperature }}<span class="temperature-unit">{{ temperature_unit }}</span></div>
         <div class="feels-like">Feels {{ feels_like }}{% if units != "standard" %}°{% endif %}</div>

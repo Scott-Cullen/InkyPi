@@ -95,9 +95,16 @@
   line-height: 1;
   flex-shrink: 0;
 }
+.current-icon-wrap {
+  width: 34%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .current-values {
-  width: 100%;
+  width: 66%;
   text-align: center;
 }
 
