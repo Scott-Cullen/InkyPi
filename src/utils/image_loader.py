@@ -14,6 +14,7 @@ import gc
 import psutil
 import tempfile
 import os
+import requests
 
 logger = logging.getLogger(__name__)
 

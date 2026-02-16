@@ -34,10 +34,13 @@ def write_env_file(filepath, entries):
             f.write("# InkyPi API Keys and Secrets\n")
             f.write("# Managed via web interface\n\n")
             for key, value in entries:
-                # Quote values with spaces or special characters
-                if ' ' in value or '"' in value or "'" in value:
-                    value = f'"{value}"'
-                f.write(f"{key}={value}\n")
+                # Properly escape values: escape double quotes and wrap in quotes if needed
+                if ' ' in value or '"' in value or "'" in value or '=' in value or '\n' in value:
+                    # Escape double quotes and backslashes
+                    escaped_value = value.replace('\\', '\\\\').replace('"', '\\"')
+                    f.write(f'{key}="{escaped_value}"\n')
+                else:
+                    f.write(f"{key}={value}\n")
         return True
     except Exception as e:
         logger.error(f"Error writing .env file: {e}")

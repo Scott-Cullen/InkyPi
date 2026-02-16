@@ -68,7 +68,7 @@ If your plugin requires user configuration through the web UI, you’ll need to 
         "display_name": "Clock",    # The name shown in the web UI for the plugin.
         "id": "clock",              # A unique identifier for the plugin (use lowercase and avoid spaces)
         "class": "Clock",           # The name of your plugin’s Python class.
-        "repository": ""            # GitHub Repositry URL, if the plugin will be published as a third party plugin.
+        "repository": ""            # GitHub Repository URL, if the plugin will be published as a third party plugin.
     }
     ```
 - Plugins will be loaded on startup if the folder contains a `plugin-info.json`
