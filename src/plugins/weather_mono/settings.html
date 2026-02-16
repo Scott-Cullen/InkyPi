@@ -79,7 +79,8 @@
     </div>
 
     <div class="form-group">
-        <input type="checkbox" id="sectionBorders" name="sectionBorders" onclick="this.value=this.checked ? 'true' : 'false';">
+        <input type="checkbox" id="sectionBorders" name="sectionBorders" value="true">
+        <input type="hidden" name="sectionBorders" value="false">
         <span>Section Borders</span>
     </div>
 
@@ -235,7 +236,6 @@
 
             const sectionBordersEnabled = pluginSettings.sectionBorders === true || pluginSettings.sectionBorders === 'true' || pluginSettings.sectionBorders === undefined;
             document.getElementById('sectionBorders').checked = sectionBordersEnabled;
-            document.getElementById('sectionBorders').value = sectionBordersEnabled ? 'true' : 'false';
 
             document.getElementById('displayRefreshTime').checked = pluginSettings.displayRefreshTime;
             document.getElementById('displayRefreshTime').value = pluginSettings.displayRefreshTime;
@@ -270,7 +270,6 @@
             document.getElementById('mainTextScale').value = "100";
             document.getElementById('detailTextScale').value = "100";
             document.getElementById('sectionBorders').checked = true;
-            document.getElementById('sectionBorders').value = "true";
             document.getElementById('displayRefreshTime').checked = true;
             document.getElementById('displayRefreshTime').value = "true";
             document.getElementById('displayMetrics').checked = true;
