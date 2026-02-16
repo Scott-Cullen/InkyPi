@@ -85,8 +85,8 @@
 .current-panel {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1.4dvw;
+  justify-content: center;
+  gap: 0.5dvw;
   min-height: 0;
 }
 
@@ -96,16 +96,16 @@
   flex-shrink: 0;
 }
 .current-icon-wrap {
-  width: 34%;
+  width: 42%;
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .current-values {
-  width: 66%;
-  text-align: center;
+  width: 58%;
+  text-align: right;
 }
 
 .current-temp {
