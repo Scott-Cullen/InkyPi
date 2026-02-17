@@ -148,7 +148,11 @@
   text-align: right;
   gap: 5.0dvh;
   flex: 0 0 auto;
-  margin-right: 0.35dvw;
+  margin-right: 0.6dvw;
+}
+
+.current-panel.graph-enabled .current-values {
+  margin-left: 0.9dvw;
 }
 
 .current-icon {
