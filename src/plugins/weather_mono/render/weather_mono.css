@@ -146,13 +146,13 @@
   align-items: flex-end;
   justify-content: center;
   text-align: right;
-  gap: 5.0dvh;
+  gap: 1.0dvh;
   flex: 0 0 auto;
   margin-right: 0.6dvw;
 }
 
 .current-panel.graph-enabled .current-values {
-  margin-left: 0.9dvw;
+  margin-left: 1.8dvw;
 }
 
 .current-icon {
