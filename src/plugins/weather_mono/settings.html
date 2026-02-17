@@ -1,5 +1,33 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<style>
+    .section-border-grid {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .section-border-option {
+        text-align: center;
+        border: 2px solid transparent;
+        padding: 5px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: border-color 0.3s ease;
+    }
+
+    .section-border-option img {
+        width: auto;
+        height: auto;
+        max-width: 100px;
+        filter: var(--image-filter);
+        transition: filter 0.3s ease;
+    }
+
+    .section-border-option.selected {
+        border-color: #007bff;
+    }
+</style>
 
 <div class="form-group">
     <label class="form-label">Location: </label>
@@ -91,11 +119,11 @@
 
     <div class="separator"></div>
     <div class="form-group" style="width: 100%; flex-basis: 100%;">
-        <h3 class="form-label" style="width: 100%; margin: 0;">Style Options</h3>
+        <h2 class="form-label" style="width: 100%; margin: 0;">Style Options</h2>
     </div>
 
     <div class="form-group" style="width: 100%; flex-basis: 100%;">
-        <label class="form-label" style="width: 100%;">Text Sizes</label>
+        <label class="form-label" style="width: 100%;">Text Sizes:</label>
     </div>
 
     <div class="form-group">
@@ -159,12 +187,21 @@
 
     <div class="form-group">
         <label for="sectionBorderStyle" class="form-label">Section Border Style:</label>
-        <select id="sectionBorderStyle" name="sectionBorderStyle" class="form-input">
-            <option value="none">None</option>
-            <option value="corner">Corner</option>
-            <option value="top-bottom">Top and Bottom</option>
-            <option value="rectangle">Rectangle</option>
-        </select>
+        <div id="section-border-style-selection" class="section-border-grid">
+            <div class="section-border-option" data-border-style="none" onclick="selectedSectionBorderStyle(this)">
+                <img src="{{ url_for('plugin.image', plugin_id='base_plugin', filename='frames/blank.png') }}" alt="None" />
+            </div>
+            <div class="section-border-option" data-border-style="corner" onclick="selectedSectionBorderStyle(this)">
+                <img src="{{ url_for('plugin.image', plugin_id='base_plugin', filename='frames/corner.png') }}" alt="Corner" />
+            </div>
+            <div class="section-border-option" data-border-style="top-bottom" onclick="selectedSectionBorderStyle(this)">
+                <img src="{{ url_for('plugin.image', plugin_id='base_plugin', filename='frames/top_and_bottom.png') }}" alt="Top and Bottom" />
+            </div>
+            <div class="section-border-option" data-border-style="rectangle" onclick="selectedSectionBorderStyle(this)">
+                <img src="{{ url_for('plugin.image', plugin_id='base_plugin', filename='frames/rectangle.png') }}" alt="Rectangle" />
+            </div>
+        </div>
+        <input type="hidden" id="sectionBorderStyle" name="sectionBorderStyle" value="rectangle" />
     </div>
 
 </div>
@@ -180,6 +217,18 @@
 </div>
 
 <script>
+
+    function selectedSectionBorderStyle(element) {
+        if (!element) return;
+
+        const previousSelection = document.querySelector('.section-border-option.selected');
+        if (previousSelection) {
+            previousSelection.classList.remove('selected');
+        }
+
+        element.classList.add('selected');
+        document.getElementById('sectionBorderStyle').value = element.getAttribute('data-border-style');
+    }
 
     function updateTitleOptions(provider) {
         const titleLocationRadio = document.getElementById('title-location');
@@ -273,7 +322,9 @@
             document.getElementById('mainTextScale').value = ['80','90','100','110','120','130','140','150'].includes(String(pluginSettings.mainTextScale)) ? String(pluginSettings.mainTextScale) : '100';
             document.getElementById('detailTextScale').value = ['80','90','100','110','120','130','140','150'].includes(String(pluginSettings.detailTextScale)) ? String(pluginSettings.detailTextScale) : '100';
             document.getElementById('headerAlignment').value = ['left','center','right'].includes(String(pluginSettings.headerAlignment)) ? String(pluginSettings.headerAlignment) : 'center';
-            document.getElementById('sectionBorderStyle').value = ['none','corner','top-bottom','rectangle'].includes(String(pluginSettings.sectionBorderStyle)) ? String(pluginSettings.sectionBorderStyle) : 'rectangle';
+            const sectionBorderStyle = ['none','corner','top-bottom','rectangle'].includes(String(pluginSettings.sectionBorderStyle)) ? String(pluginSettings.sectionBorderStyle) : 'rectangle';
+            const sectionBorderStyleOption = document.querySelector(`.section-border-option[data-border-style="${sectionBorderStyle}"]`);
+            selectedSectionBorderStyle(sectionBorderStyleOption);
 
             document.getElementById('displayRefreshTime').checked = pluginSettings.displayRefreshTime;
             document.getElementById('displayRefreshTime').value = pluginSettings.displayRefreshTime;
@@ -308,7 +359,8 @@
             document.getElementById('mainTextScale').value = "100";
             document.getElementById('detailTextScale').value = "100";
             document.getElementById('headerAlignment').value = "center";
-            document.getElementById('sectionBorderStyle').value = "rectangle";
+            const sectionBorderStyleOption = document.querySelector('.section-border-option[data-border-style="rectangle"]');
+            selectedSectionBorderStyle(sectionBorderStyleOption);
             document.getElementById('displayRefreshTime').checked = true;
             document.getElementById('displayRefreshTime').value = "true";
             document.getElementById('displayMetrics').checked = true;
