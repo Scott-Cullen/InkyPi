@@ -134,6 +134,15 @@ class WaveshareDisplay(AbstractDisplay):
         if not image:
             raise ValueError(f"No image provided.")
 
+        logger.debug(
+            "Waveshare frame info | mode=%s size=%sx%s expected=%sx%s",
+            getattr(image, "mode", "unknown"),
+            image.size[0] if getattr(image, "size", None) else "?",
+            image.size[1] if getattr(image, "size", None) else "?",
+            getattr(self.epd_display, "width", "?"),
+            getattr(self.epd_display, "height", "?"),
+        )
+
         # Assume device was in sleep mode.
         self.epd_display_init()
 
@@ -146,6 +155,10 @@ class WaveshareDisplay(AbstractDisplay):
         if should_full_clear:
             logger.info("Performing full clear on Waveshare display.")
             self.epd_display.Clear()
+            # Some panels/controllers can intermittently fail to latch the next frame
+            # immediately after a full clear unless reinitialized.
+            logger.info("Reinitializing Waveshare display after full clear.")
+            self.epd_display_init()
             self._last_full_clear_monotonic = now
         else:
             logger.debug("Skipping full clear (throttled).")
@@ -160,6 +173,9 @@ class WaveshareDisplay(AbstractDisplay):
                 self.epd_display.getbuffer(black_layer),
                 self.epd_display.getbuffer(red_layer),
             )
+
+        # Give the controller a short settle window before deep sleep.
+        time.sleep(0.2)
 
         # Put device into low power mode (EPD displays maintain image when powered off)
         logger.info("Putting Waveshare display into sleep mode for power saving.")
