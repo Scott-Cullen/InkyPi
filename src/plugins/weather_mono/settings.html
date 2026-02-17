@@ -170,7 +170,7 @@
             </div>
 
             <div class="form-group" style="width: 100%; flex-basis: 100%;">
-                <label class="form-label" style="width: 100%;">Alignments</label>
+                <label class="form-label" style="width: 100%;">Alignments:</label>
             </div>
 
             <div class="form-group">
@@ -182,12 +182,8 @@
                 </select>
             </div>
 
-            <div class="form-group" style="width: 100%; flex-basis: 100%;">
-                <label class="form-label" style="width: 100%;">Border Style</label>
-            </div>
-
             <div class="form-group">
-                <label for="sectionBorderStyle" class="form-label">Section Border Style:</label>
+                <label for="sectionBorderStyle" class="form-label">Section Frame:</label>
                 <div id="section-border-style-selection" class="section-border-grid">
                     <div class="section-border-option" data-border-style="none" onclick="selectedSectionBorderStyle(this)">
                         <img src="{{ url_for('plugin.image', plugin_id='base_plugin', filename='frames/blank.png') }}" alt="None" />
