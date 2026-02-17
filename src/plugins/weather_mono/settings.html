@@ -103,6 +103,16 @@
     </div>
 
     <div class="form-group">
+        <label for="sectionBorderStyle" class="form-label">Section Border Style:</label>
+        <select id="sectionBorderStyle" name="sectionBorderStyle" class="form-input">
+            <option value="none">None</option>
+            <option value="corner">Corner</option>
+            <option value="top-bottom">Top and Bottom</option>
+            <option value="rectangle">Rectangle</option>
+        </select>
+    </div>
+
+    <div class="form-group">
       <input type="checkbox" id="displayRefreshTime" name="displayRefreshTime" onclick="this.value=this.checked ? 'true' : 'false';">
       <span>Refresh Time</span>
     </div>
@@ -252,9 +262,10 @@
             document.getElementById('mainTextScale').value = ['80','90','100','110','120','130','140','150'].includes(String(pluginSettings.mainTextScale)) ? String(pluginSettings.mainTextScale) : '100';
             document.getElementById('detailTextScale').value = ['80','90','100','110','120','130','140','150'].includes(String(pluginSettings.detailTextScale)) ? String(pluginSettings.detailTextScale) : '100';
             document.getElementById('headerAlignment').value = ['left','center','right'].includes(String(pluginSettings.headerAlignment)) ? String(pluginSettings.headerAlignment) : 'center';
+            document.getElementById('sectionBorderStyle').value = ['none','corner','top-bottom','rectangle'].includes(String(pluginSettings.sectionBorderStyle)) ? String(pluginSettings.sectionBorderStyle) : 'rectangle';
 
-            const sectionBordersEnabled = pluginSettings.sectionBorders === true || pluginSettings.sectionBorders === 'true' || pluginSettings.sectionBorders === undefined;
-            document.getElementById('sectionBorders').checked = sectionBordersEnabled;
+            const sectionBordersValue = ['true', 'false'].includes(String(pluginSettings.sectionBorders)) ? String(pluginSettings.sectionBorders) : 'true';
+            document.getElementById('sectionBorders').checked = sectionBordersValue === 'true';
 
             document.getElementById('displayRefreshTime').checked = pluginSettings.displayRefreshTime;
             document.getElementById('displayRefreshTime').value = pluginSettings.displayRefreshTime;
@@ -290,6 +301,7 @@
             document.getElementById('detailTextScale').value = "100";
             document.getElementById('headerAlignment').value = "center";
             document.getElementById('sectionBorders').checked = true;
+            document.getElementById('sectionBorderStyle').value = "rectangle";
             document.getElementById('displayRefreshTime').checked = true;
             document.getElementById('displayRefreshTime').value = "true";
             document.getElementById('displayMetrics').checked = true;

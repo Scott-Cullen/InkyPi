@@ -80,12 +80,40 @@
 }
 
 .panel {
+  position: relative;
   border-radius: 0.8dvw;
   padding: 0.8dvh 1dvw;
 }
 
-.with-borders .panel {
+.with-borders.section-border-rectangle .panel {
   border: 2px solid currentColor;
+}
+
+.with-borders.section-border-top-bottom .panel {
+  border-top: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+}
+
+.with-borders.section-border-corner .panel::before,
+.with-borders.section-border-corner .panel::after {
+  content: "";
+  position: absolute;
+  width: 1.8dvw;
+  height: 1.8dvw;
+}
+
+.with-borders.section-border-corner .panel::before {
+  top: 0;
+  left: 0;
+  border-top: 2px solid currentColor;
+  border-left: 2px solid currentColor;
+}
+
+.with-borders.section-border-corner .panel::after {
+  bottom: 0;
+  right: 0;
+  border-bottom: 2px solid currentColor;
+  border-right: 2px solid currentColor;
 }
 
 .main-row {
