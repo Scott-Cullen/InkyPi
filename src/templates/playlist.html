@@ -111,8 +111,8 @@
 
                 const result = await response.json();
                 if (response.ok) {
-                    sessionStorage.setItem("storedMessage", JSON.stringify({ type: "success", text: `Success! ${result.message}` }));
-                    location.reload();
+                    showResponseModal('success', `Success! ${result.message}`);
+                    setTimeout(() => location.reload(), 1200);
                 } else {
                     showResponseModal('failure', `Error!  ${result.error}`);
                 }
