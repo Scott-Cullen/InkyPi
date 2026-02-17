@@ -148,6 +148,7 @@
   text-align: right;
   gap: 0.25dvh;
   flex: 0 0 auto;
+  margin-right: 0.35dvw;
 }
 
 .current-icon {

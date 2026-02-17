@@ -27,8 +27,8 @@
     <div class="current-panel panel {% if graph_on %}graph-enabled{% endif %}">
       {% if graph_on %}
       <div class="current-side-meta">
-        <div class="feels-like">Feels {{ feels_like }}{% if units != "standard" %}°{% endif %}</div>
-        <div class="min-max">H {{ forecast[0].high }}{% if units != "standard" %}°{% endif %} · L {{ forecast[0].low }}{% if units != "standard" %}°{% endif %}</div>
+        <div class="feels-like">Feels Like {{ feels_like }}{% if units != "standard" %}°{% endif %}</div>
+        <div class="min-max">High {{ forecast[0].high }}{% if units != "standard" %}°{% endif %} · Low {{ forecast[0].low }}{% if units != "standard" %}°{% endif %}</div>
       </div>
       {% endif %}
 
@@ -36,8 +36,8 @@
         <div class="current-temp">{{ current_temperature }}<span class="temperature-unit">{{ temperature_unit }}</span></div>
         {% if not graph_on %}
         <div class="temp-meta-row">
-          <div class="feels-like">Feels {{ feels_like }}{% if units != "standard" %}°{% endif %} · </div>
-          <div class="min-max">H {{ forecast[0].high }}{% if units != "standard" %}°{% endif %} · L {{ forecast[0].low }}{% if units != "standard" %}°{% endif %}</div>
+          <div class="feels-like">Feels Like {{ feels_like }}{% if units != "standard" %}°{% endif %} · </div>
+          <div class="min-max">High {{ forecast[0].high }}{% if units != "standard" %}°{% endif %} · Low {{ forecast[0].low }}{% if units != "standard" %}°{% endif %}</div>
         </div>
         {% endif %}
       </div>
