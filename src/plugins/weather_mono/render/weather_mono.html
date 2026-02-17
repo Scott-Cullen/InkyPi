@@ -28,7 +28,8 @@
       {% if graph_on %}
       <div class="current-side-meta">
         <div class="feels-like">Feels Like {{ feels_like }}{% if units != "standard" %}°{% endif %}</div>
-        <div class="min-max">High {{ forecast[0].high }}{% if units != "standard" %}°{% endif %} · Low {{ forecast[0].low }}{% if units != "standard" %}°{% endif %}</div>
+        <div class="min-max">High {{ forecast[0].high }}{% if units != "standard" %}°{% endif %}</div>
+        <div class="min-max">Low {{ forecast[0].low }}{% if units != "standard" %}°{% endif %}</div>
       </div>
       {% endif %}
 
