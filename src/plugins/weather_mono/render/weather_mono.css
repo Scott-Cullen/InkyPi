@@ -136,6 +136,20 @@
   min-height: 0;
 }
 
+.current-panel.graph-enabled {
+  gap: 1.2dvw;
+}
+
+.current-side-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  text-align: right;
+  gap: 0.25dvh;
+  flex: 0 0 auto;
+}
+
 .current-icon {
   font-size: min(24dvh, 28dvw);
   line-height: 1;
