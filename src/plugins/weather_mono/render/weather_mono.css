@@ -73,20 +73,20 @@
 }
 
 .title {
-  font-size: calc(min(7.2dvh, 7.8dvw) * var(--header-scale, 1));
+  font-size: calc(min(6.2dvh, 6.8dvw) * var(--header-scale, 1));
   font-weight: 700;
   white-space: nowrap;
 }
 
 .header-separator {
-  font-size: calc(min(7.2dvh, 7.8dvw) * var(--header-scale, 1));
+  font-size: calc(min(6.2dvh, 6.8dvw) * var(--header-scale, 1));
   font-weight: 700;
   line-height: 1;
   white-space: nowrap;
 }
 
 .current-date {
-  font-size: calc(min(7.2dvh, 7.8dvw) * var(--header-scale, 1));
+  font-size: calc(min(6.2dvh, 6.8dvw) * var(--header-scale, 1));
   font-weight: 700;
   white-space: nowrap;
 }

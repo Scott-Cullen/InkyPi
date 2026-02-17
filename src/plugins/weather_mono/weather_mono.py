@@ -134,8 +134,12 @@ class WeatherMono(Weather):
         self._attach_material_symbol_tokens(template_params)
         self._validate_symbol_font()
 
-        image = self.render_image(dimensions, "weather_mono.html", "weather_mono.css", template_params)
-
-        if not image:
+        first_image = self.render_image(dimensions, "weather_mono.html", "weather_mono.css", template_params)
+        if not first_image:
             raise RuntimeError("Failed to take screenshot, please check logs.")
-        return image
+
+        second_image = self.render_image(dimensions, "weather_mono.html", "weather_mono.css", template_params)
+        if second_image:
+            return second_image
+
+        return first_image
