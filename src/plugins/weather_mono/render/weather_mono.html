@@ -56,12 +56,12 @@
   {% if plugin_settings.displayGraph and plugin_settings.displayGraph == "true" %}
     <div class="hourly panel">
       {% for hour in hourly_forecast[:8] %}
-        <div class="hourly-row">
-          <span>{{ hour.time }}</span>
-          <span>{{ hour.temperature }}{% if units != "standard" %}°{% endif %}</span>
-          <span>{{ (hour.precipitation * 100) | round | int }}%</span>
+        <div class="hourly-item">
+          <span class="hourly-time">{{ hour.time }}</span>
+          <span class="hourly-temp">{{ hour.temperature }}{% if units != "standard" %}°{% endif %}</span>
+          <span class="hourly-pop">{{ (hour.precipitation * 100) | round | int }}%</span>
           {% if plugin_settings.displayRain == "true" %}
-          <span>{{ hour.rain }}</span>
+          <span class="hourly-rain">{{ hour.rain }}</span>
           {% endif %}
         </div>
       {% endfor %}

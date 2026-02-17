@@ -225,20 +225,39 @@
 
 .hourly {
   flex-shrink: 0;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.3dvh 0.9dvw;
-}
-
-.hourly-row {
   display: flex;
+  align-items: stretch;
   justify-content: space-between;
-  gap: 0.5dvw;
-  font-size: calc(min(2.9dvh, 3.3dvw) * var(--detail-scale, 1));
+  gap: 0.6dvw;
 }
 
-.with-borders .hourly-row {
-  border-bottom: 1px solid currentColor;
+.hourly-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex: 1 1 0;
+  min-width: 0;
+  gap: 0.15dvh;
+  font-size: calc(min(2.7dvh, 3.1dvw) * var(--detail-scale, 1));
+}
+
+.hourly-time {
+  font-weight: 600;
+}
+
+.hourly-temp {
+  font-weight: 700;
+}
+
+.hourly-pop,
+.hourly-rain {
+  opacity: 0.9;
+}
+
+.with-borders .hourly-item:not(:first-child) {
+  border-left: 1px solid currentColor;
 }
 
 .forecast {
