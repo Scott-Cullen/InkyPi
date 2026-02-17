@@ -28,22 +28,18 @@
         border-color: #007bff;
     }
 
-    .settings-subsection-title {
-        width: 100%;
-        margin: 8px 0 4px;
-        padding-bottom: 4px;
-        border-bottom: 1px solid var(--border-light);
-        font-size: 0.8rem;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        color: var(--text-primary);
-        opacity: 0.92;
-    }
-
     .settings-field-label {
         font-weight: 500;
         opacity: 0.9;
+    }
+
+    .plugin-style-section {
+        width: 100%;
+        padding: 8px 0;
+    }
+
+    .plugin-style-section + .plugin-style-section {
+        margin-top: 4px;
     }
 
     .text-size-row {
@@ -148,87 +144,84 @@
     </div>
 
     <div class="separator"></div>
-    <div class="collapsible" style="width: 100%;">
-        <button type="button" class="collapsible-header" onclick="toggleCollapsible(this)">
-            Weather Mono Style Options <span class="collapsible-icon">▼</span>
-        </button>
-        <div class="settings-container collapsible-content">
-            <div class="settings-subsection-title">Text Sizes</div>
+    <div class="settings-container" style="width: 100%;">
+            <div class="plugin-style-section">
+                <div class="text-size-row">
+                    <div class="form-group">
+                        <label for="headerTextScale" class="form-label settings-field-label">Header:</label>
+                        <select id="headerTextScale" name="headerTextScale" class="form-input">
+                            <option value="80">80%</option>
+                            <option value="90">90%</option>
+                            <option value="100">100%</option>
+                            <option value="110">110%</option>
+                            <option value="120">120%</option>
+                            <option value="130">130%</option>
+                            <option value="140">140%</option>
+                            <option value="150">150%</option>
+                        </select>
+                    </div>
 
-            <div class="text-size-row">
-                <div class="form-group">
-                    <label for="headerTextScale" class="form-label settings-field-label">Header:</label>
-                    <select id="headerTextScale" name="headerTextScale" class="form-input">
-                        <option value="80">80%</option>
-                        <option value="90">90%</option>
-                        <option value="100">100%</option>
-                        <option value="110">110%</option>
-                        <option value="120">120%</option>
-                        <option value="130">130%</option>
-                        <option value="140">140%</option>
-                        <option value="150">150%</option>
-                    </select>
+                    <div class="form-group">
+                        <label for="mainTextScale" class="form-label settings-field-label">Main Temp:</label>
+                        <select id="mainTextScale" name="mainTextScale" class="form-input">
+                            <option value="80">80%</option>
+                            <option value="90">90%</option>
+                            <option value="100">100%</option>
+                            <option value="110">110%</option>
+                            <option value="120">120%</option>
+                            <option value="130">130%</option>
+                            <option value="140">140%</option>
+                            <option value="150">150%</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="detailTextScale" class="form-label settings-field-label">Metrics/Forecast:</label>
+                        <select id="detailTextScale" name="detailTextScale" class="form-input">
+                            <option value="80">80%</option>
+                            <option value="90">90%</option>
+                            <option value="100">100%</option>
+                            <option value="110">110%</option>
+                            <option value="120">120%</option>
+                            <option value="130">130%</option>
+                            <option value="140">140%</option>
+                            <option value="150">150%</option>
+                        </select>
+                    </div>
                 </div>
+            </div>
 
+            <div class="plugin-style-section">
                 <div class="form-group">
-                    <label for="mainTextScale" class="form-label settings-field-label">Main Temp:</label>
-                    <select id="mainTextScale" name="mainTextScale" class="form-input">
-                        <option value="80">80%</option>
-                        <option value="90">90%</option>
-                        <option value="100">100%</option>
-                        <option value="110">110%</option>
-                        <option value="120">120%</option>
-                        <option value="130">130%</option>
-                        <option value="140">140%</option>
-                        <option value="150">150%</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="detailTextScale" class="form-label settings-field-label">Metrics/Forecast:</label>
-                    <select id="detailTextScale" name="detailTextScale" class="form-input">
-                        <option value="80">80%</option>
-                        <option value="90">90%</option>
-                        <option value="100">100%</option>
-                        <option value="110">110%</option>
-                        <option value="120">120%</option>
-                        <option value="130">130%</option>
-                        <option value="140">140%</option>
-                        <option value="150">150%</option>
+                    <label for="headerAlignment" class="form-label settings-field-label">Header Alignment:</label>
+                    <select id="headerAlignment" name="headerAlignment" class="form-input">
+                        <option value="left">Left</option>
+                        <option value="center">Center</option>
+                        <option value="right">Right</option>
                     </select>
                 </div>
             </div>
 
-            <div class="settings-subsection-title">Alignments</div>
-
-            <div class="form-group">
-                <label for="headerAlignment" class="form-label settings-field-label">Header Alignment:</label>
-                <select id="headerAlignment" name="headerAlignment" class="form-input">
-                    <option value="left">Left</option>
-                    <option value="center">Center</option>
-                    <option value="right">Right</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="sectionBorderStyle" class="form-label settings-field-label">Section Frame:</label>
-                <div id="section-border-style-selection" class="section-border-grid">
-                    <div class="section-border-option" data-border-style="none" onclick="selectedSectionBorderStyle(this)">
-                        <img src="{{ url_for('plugin.image', plugin_id='base_plugin', filename='frames/blank.png') }}" alt="None" />
+            <div class="plugin-style-section">
+                <div class="form-group">
+                    <label for="sectionBorderStyle" class="form-label settings-field-label">Section Frame:</label>
+                    <div id="section-border-style-selection" class="section-border-grid">
+                        <div class="section-border-option" data-border-style="none" onclick="selectedSectionBorderStyle(this)">
+                            <img src="{{ url_for('plugin.image', plugin_id='base_plugin', filename='frames/blank.png') }}" alt="None" />
+                        </div>
+                        <div class="section-border-option" data-border-style="corner" onclick="selectedSectionBorderStyle(this)">
+                            <img src="{{ url_for('plugin.image', plugin_id='base_plugin', filename='frames/corner.png') }}" alt="Corner" />
+                        </div>
+                        <div class="section-border-option" data-border-style="top-bottom" onclick="selectedSectionBorderStyle(this)">
+                            <img src="{{ url_for('plugin.image', plugin_id='base_plugin', filename='frames/top_and_bottom.png') }}" alt="Top and Bottom" />
+                        </div>
+                        <div class="section-border-option" data-border-style="rectangle" onclick="selectedSectionBorderStyle(this)">
+                            <img src="{{ url_for('plugin.image', plugin_id='base_plugin', filename='frames/rectangle.png') }}" alt="Rectangle" />
+                        </div>
                     </div>
-                    <div class="section-border-option" data-border-style="corner" onclick="selectedSectionBorderStyle(this)">
-                        <img src="{{ url_for('plugin.image', plugin_id='base_plugin', filename='frames/corner.png') }}" alt="Corner" />
-                    </div>
-                    <div class="section-border-option" data-border-style="top-bottom" onclick="selectedSectionBorderStyle(this)">
-                        <img src="{{ url_for('plugin.image', plugin_id='base_plugin', filename='frames/top_and_bottom.png') }}" alt="Top and Bottom" />
-                    </div>
-                    <div class="section-border-option" data-border-style="rectangle" onclick="selectedSectionBorderStyle(this)">
-                        <img src="{{ url_for('plugin.image', plugin_id='base_plugin', filename='frames/rectangle.png') }}" alt="Rectangle" />
-                    </div>
+                    <input type="hidden" id="sectionBorderStyle" name="sectionBorderStyle" value="rectangle" />
                 </div>
-                <input type="hidden" id="sectionBorderStyle" name="sectionBorderStyle" value="rectangle" />
             </div>
-        </div>
     </div>
 
     <div class="separator"></div>
