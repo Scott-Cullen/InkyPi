@@ -91,7 +91,7 @@
 
     <div class="separator"></div>
     <div class="form-group">
-        <label class="form-label">Style Options:</label>
+        <h3 class="form-label">Style Options</h3>
     </div>
 
     <div class="form-group">
@@ -143,12 +143,6 @@
             <option value="center">Center</option>
             <option value="right">Right</option>
         </select>
-    </div>
-
-    <div class="form-group">
-        <input type="checkbox" id="sectionBorders" name="sectionBorders" value="true">
-        <input type="hidden" name="sectionBorders" value="false">
-        <span>Section Borders</span>
     </div>
 
     <div class="form-group">
@@ -269,9 +263,6 @@
             document.getElementById('headerAlignment').value = ['left','center','right'].includes(String(pluginSettings.headerAlignment)) ? String(pluginSettings.headerAlignment) : 'center';
             document.getElementById('sectionBorderStyle').value = ['none','corner','top-bottom','rectangle'].includes(String(pluginSettings.sectionBorderStyle)) ? String(pluginSettings.sectionBorderStyle) : 'rectangle';
 
-            const sectionBordersValue = ['true', 'false'].includes(String(pluginSettings.sectionBorders)) ? String(pluginSettings.sectionBorders) : 'true';
-            document.getElementById('sectionBorders').checked = sectionBordersValue === 'true';
-
             document.getElementById('displayRefreshTime').checked = pluginSettings.displayRefreshTime;
             document.getElementById('displayRefreshTime').value = pluginSettings.displayRefreshTime;
 
@@ -305,7 +296,6 @@
             document.getElementById('mainTextScale').value = "100";
             document.getElementById('detailTextScale').value = "100";
             document.getElementById('headerAlignment').value = "center";
-            document.getElementById('sectionBorders').checked = true;
             document.getElementById('sectionBorderStyle').value = "rectangle";
             document.getElementById('displayRefreshTime').checked = true;
             document.getElementById('displayRefreshTime').value = "true";

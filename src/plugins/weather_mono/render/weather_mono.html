@@ -1,14 +1,18 @@
 {% extends "plugin.html" %}
 
 {% block content %}
-{% set borders_on = plugin_settings.sectionBorders in [true, 'true', 'True', 1, '1'] %}
 {% set metrics_on = plugin_settings.displayMetrics == "true" %}
 {% set header_scale = plugin_settings.headerTextScale | default('100') %}
 {% set main_scale = plugin_settings.mainTextScale | default('100') %}
 {% set detail_scale = plugin_settings.detailTextScale | default('100') %}
 {% set header_alignment = plugin_settings.headerAlignment if plugin_settings.headerAlignment in ['left', 'center', 'right'] else 'center' %}
-{% set section_border_style = plugin_settings.sectionBorderStyle if plugin_settings.sectionBorderStyle in ['none', 'corner', 'top-bottom', 'rectangle'] else 'rectangle' %}
-<div class="mono-weather-dashboard {% if borders_on %}with-borders section-border-{{ section_border_style }}{% endif %} header-align-{{ header_alignment }}" style="--header-scale: {{ header_scale | int / 100 }}; --main-scale: {{ main_scale | int / 100 }}; --detail-scale: {{ detail_scale | int / 100 }};">
+{% set legacy_borders_on = plugin_settings.sectionBorders in [true, 'true', 'True', 1, '1'] %}
+{% if plugin_settings.sectionBorderStyle in ['none', 'corner', 'top-bottom', 'rectangle'] %}
+  {% set section_border_style = plugin_settings.sectionBorderStyle %}
+{% else %}
+  {% set section_border_style = 'rectangle' if legacy_borders_on else 'none' %}
+{% endif %}
+<div class="mono-weather-dashboard {% if section_border_style != 'none' %}with-borders section-border-{{ section_border_style }}{% endif %} header-align-{{ header_alignment }}" style="--header-scale: {{ header_scale | int / 100 }}; --main-scale: {{ main_scale | int / 100 }}; --detail-scale: {{ detail_scale | int / 100 }};">
   {% if plugin_settings.displayRefreshTime == "true" %}
     <div class="last-refresh">Updated {{ last_refresh_time }}</div>
   {% endif %}
